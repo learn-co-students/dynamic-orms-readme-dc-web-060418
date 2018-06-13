@@ -8,12 +8,12 @@ class Song
     self.to_s.downcase.pluralize
   end
 
-  def self.column_names
-    DB[:conn].results_as_hash = true
+  def self.column_names #returns an array of column names as strings
+    DB[:conn].results_as_hash = true #method provided by ruby gem, returns array of hashes
 
     sql = "pragma table_info('#{table_name}')"
 
-    table_info = DB[:conn].execute(sql)
+    table_info = DB[:conn].execute(sql) #This is an array of hashes, with the column names in ["name"]
     column_names = []
     table_info.each do |row|
       column_names << row["name"]
